@@ -1,0 +1,182 @@
+// function App() {
+//   const [todos, setTodos] = useState([]);
+//   const [filtredTodos, setFiltredTodos] = useState(todos);
+//   const [todo, setTodo] = useState("");
+//   const [editTodo, setEditTodo] = useState("");
+//   const [filter, setFilter] = useState("all");
+
+//   useEffect(() => {
+//     if (filter === "active") {
+//       setFiltredTodos(todos.filter(todo => todo.active));
+//     } else if (filter === "completed") {
+//       setFiltredTodos(todos.filter(todo => todo.active === false));
+//     } else setFiltredTodos(todos);
+//   }, [filter, todos]);
+
+//   const addTodo = e => {
+//     if (e.key === "Enter") {
+//       setTodos(todos => [
+//         ...todos,
+//         {
+//           id: Math.random()
+//             .toString(36)
+//             .substr(2, 9),
+//           todo,
+//           editable: false,
+//           active: true,
+//           draft: todo
+//         }
+//       ]);
+//       setTodo("");
+//     }
+//   };
+
+//   const deleteTodo = todo_id => {
+//     setTodos(todos.filter(todo => todo.id !== todo_id));
+//   };
+
+//   const handleChangeTodo = todo => {
+//     setTodo(todo);
+//   };
+//   const findTodoIndex = (arr, item) => {
+//     return arr.findIndex(elm => elm.id === item.id);
+//   };
+//   const changeActiveState = (checked, todo) => {
+//     const tempTodos = todos;
+
+//     // const index = tempTodos.findIndex(elm => elm.id === todo.id);
+//     const index = findTodoIndex(tempTodos, todo);
+//     tempTodos[index].active = !checked;
+//     setTodos([...tempTodos]);
+//   };
+
+//   const filterTodos = filter => {
+//     setFilter(filter);
+//   };
+
+//   const clearCompleted = () => {
+//     setTodos(todos.filter(todo => todo.active));
+//   };
+
+//   const checkForCompleted = () => {
+//     return todos.filter(todo => todo.active === false).length;
+//   };
+
+//   const count = () => {
+//     return todos.filter(todo => todo.active).length;
+//   };
+
+//   const editOnDoubleClick = todo => {
+//     const index = findTodoIndex(todos, todo);
+//     const current = todos.reduce((acc,val)=>[...acc, {...val, editable: false}],[])
+//     current[index].editable = true;
+//     setTodos([...current]);
+//     setEditTodo(todo.todo);
+//   };
+
+//   const handleEditChange = (value, todo) => {
+//     setEditTodo(value);
+
+//   };
+
+//   const saveEditedTodo = (event, todo) => {
+//     if (event.key === "Enter") {
+//       const index = findTodoIndex(todos, todo);
+//       todos[index].todo = editTodo;
+//       todos[index].editable = false;
+//       setTodos([...todos]);
+//       setEditTodo("");
+//     }
+//   };
+//   return (
+//     <div className="App">
+//       <div className="header">
+//         <h1 className="title">todos</h1>
+//       </div>
+//       <section className="main">
+//         <input
+//           type="text"
+//           name="todo"
+//           placeholder="What needs to be done?"
+//           className="todo__input"
+//           value={todo}
+//           onChange={e => handleChangeTodo(e.target.value)}
+//           onKeyDown={addTodo}
+//         />
+//         {todos.length ? (
+//           <div className="todos__container">
+//             <ul className="todos__list">
+//               {filtredTodos.map(todo => (
+//                 <li className="todo__item" key={todo.id}>
+//                   <div className="view">
+//                     <input
+//                       type="checkbox"
+//                       className="toggle"
+//                       checked={!todo.active}
+//                       onChange={event =>
+//                         changeActiveState(event.target.checked, todo)
+//                       }
+//                     />
+//                     {todo.editable === false ? (
+//                       <label
+//                         onDoubleClick={() => editOnDoubleClick(todo)}
+//                         className="label__todo"
+//                       >
+//                         {todo.todo}
+//                       </label>
+//                     ) : (
+//                       <input
+//                         className="label__edited"
+//                         value={editTodo}
+//                         onChange={event =>
+//                           handleEditChange(event.target.value)
+//                         }
+//                         onKeyDown={e => saveEditedTodo(e, todo)}
+//                       />
+//                     )}
+//                     <button
+//                       className="destroy"
+//                       onClick={() => deleteTodo(todo.id)}
+//                     ></button>
+//                   </div>
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+//         ) : null}
+//         {todos.length ? (
+//           <section className="todos__state">
+//             <div>
+//               <p>{`${count()} items left`}</p>
+//             </div>
+//             <ul>
+//               <li
+//                 className={filter === "all" ? "active" : ""}
+//                 onClick={() => filterTodos("all")}
+//               >
+//                 All
+//               </li>
+//               <li
+//                 className={filter === "active" ? "active" : ""}
+//                 onClick={() => filterTodos("active")}
+//               >
+//                 Active
+//               </li>
+//               <li
+//                 className={filter === "completed" ? "active" : ""}
+//                 onClick={() => filterTodos("completed")}
+//               >
+//                 Completed
+//               </li>
+//             </ul>
+//             <button className="clear_completed" onClick={clearCompleted}>
+//               {checkForCompleted() ? "Clear completed" : null}
+//             </button>
+//           </section>
+//         ) : null}
+//       </section>
+//     </div>
+//   );
+// }
+
+// export default App;
